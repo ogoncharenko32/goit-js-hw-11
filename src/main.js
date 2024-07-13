@@ -17,6 +17,10 @@ submitBtn.addEventListener('click', evt => {
   evt.preventDefault();
   const images = [];
 
+  const gallery = document.querySelector('ul');
+  gallery.classList.add('gallery');
+  gallery.innerHTML = '';
+
   showLoader();
 
   fetchImages(query)
