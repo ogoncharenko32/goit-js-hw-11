@@ -4,17 +4,11 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('form input');
-const submitBtn = document.querySelector('form button');
 const form = document.querySelector('form');
 
-let query = '';
-
-input.addEventListener('input', evt => {
-  query = evt.currentTarget.value;
-});
-
-submitBtn.addEventListener('click', evt => {
+form.addEventListener('submit', evt => {
   evt.preventDefault();
+  const query = input.value;
   const images = [];
 
   const gallery = document.querySelector('ul');
@@ -32,8 +26,7 @@ submitBtn.addEventListener('click', evt => {
           messageColor: '#fff',
           color: '#EF4040',
           position: 'topRight',
-          timeout: 2500,
-          icon: './src/img/error.svg',
+          timeout: 4000,
           iconColor: '#fff',
           maxWidth: '432px',
         });
@@ -42,7 +35,13 @@ submitBtn.addEventListener('click', evt => {
       }
     })
     .catch(error => {
-      console.error(error);
+      iziToast.show({
+        message: error.stack,
+        messageColor: '#fff',
+        color: '#EF4040',
+        position: 'topCenter',
+        timeout: 5000,
+      });
     })
     .finally(() => {
       hideLoader();
